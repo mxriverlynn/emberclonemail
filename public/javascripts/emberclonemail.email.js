@@ -25,9 +25,8 @@ EmberCloneMail.emailListController = Ember.ArrayController.create({
   }
 });
 
-EmberCloneMail.emailListController.loadEmail();
-
 EmberCloneMail.EmailListView = Em.View.extend({
+  tagName: "ul",
   classNames: ["email-list", "email-view"],
   templateName: "email-list-view"
 });
@@ -41,4 +40,9 @@ EmberCloneMail.EmailPreview = Em.View.extend({
     EmberCloneMail.emailController.showEmail(email);
   }
 });
+
+EmberCloneMail.emailListController.loadEmail();
+EmberCloneMail.emailListView = EmberCloneMail.EmailListView.create({});
+EmberCloneMail.emailListView.appendTo("#main");
+
 

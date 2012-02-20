@@ -8,4 +8,3 @@
 // http://github.com/derickbailey/emberclonemail
 
 EmberCloneMail = Ember.Application.create();
-
