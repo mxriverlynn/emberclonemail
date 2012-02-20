@@ -1,8 +1,12 @@
 EmberCloneMail.Email = Ember.Object.extend({});
 
 EmberCloneMail.emailController = Ember.Object.create({
-  showEmail: function(email){
-    this.set("content", email);
+  showEmail: function(view){
+    var email = view.get("content");
+    EmberCloneMail.emailView = EmberCloneMail.EmailView.create({
+      content: email
+    });
+    EmberCloneMail.emailView.replaceIn("#main");
   }
 });
 
@@ -31,14 +35,18 @@ EmberCloneMail.EmailListView = Em.View.extend({
   templateName: "email-list-view"
 });
 
-EmberCloneMail.EmailPreview = Em.View.extend({
+EmberCloneMail.EmailPreview = Em.View.extend(Ember.TargetActionSupport, {
   templateName: "email-preview",
 
   click: function(e){
-    e.preventDefault();
-    var email = this.get("content");
-    EmberCloneMail.emailController.showEmail(email);
+    this.triggerAction();
   }
+});
+
+EmberCloneMail.EmailView = Em.View.extend({
+  tagName: "ul",
+  classNames: ["email-list"],
+  templateName: "email-view"
 });
 
 EmberCloneMail.emailListController.loadEmail();

@@ -4,12 +4,16 @@
     %title EmberCloneMail: A Sample App Built With EmberJS
     %link{:href=>"/css/emberclonemail.css", :rel=>"stylesheet", :type=>"text/css"}
 
-    %script{ :type=>"text/x-handlebars", :"data-template-name" => "email-list-view"}
+    %script{ :"data-template-name" => "email-list-view", :type=>"text/x-handlebars"}
       {{#each EmberCloneMail.emailListController}}
-      {{view EmberCloneMail.EmailPreview tagName="li" contentBinding="this"}}
+      {{view EmberCloneMail.EmailPreview 
+      tagName="li" 
+      contentBinding="this" 
+      target="EmberCloneMail.emailController" 
+      action="showEmail"}}
       {{/each}}
 
-    %script{ :type => "text/x-handlebars", :"data-template-name" => "email-preview"}
+    %script{ :"data-template-name" => "email-preview", :type => "text/x-handlebars"}
       {{#with content}}
       %header
         %span.from
@@ -20,7 +24,28 @@
           {{date}}
       {{/with}}
 
-    %script{ :type => "text/x-handlebars", :"data-template-name" => "email-category-list"}
+    %script{:"data-template-name" => "email-view", :type => "text/x-handlebars"}
+      {{#with content}}
+      %li
+        %header
+          %span.from
+            {{from}}
+          %span.subject
+            {{subject}}
+          %span.date
+            {{date}}
+        %article
+          .body
+            {{#if categories}}
+            %ul.emailCategories
+              {{#each categories}}
+              %li {{this}}
+              {{/each}}
+            {{/if}}
+            %p {{body}}
+      {{/with}}
+
+    %script{:"data-template-name" => "email-category-list", :type => "text/x-handlebars"}
       %p Mail Categories
       %ul
         %li
@@ -34,7 +59,7 @@
         {{view EmberCloneMail.EmailCategoryView tagName="li" contentBinding="this"}}
         {{/each}}
 
-    %script{ :type => "text/x-handlebars", :"data-template-name" => "email-category"}
+    %script{:"data-template-name" => "email-category", :type => "text/x-handlebars"}
       {{#with content}}
       %a{:"data-category" => "", :href => "#inbox/categories/"} {{name}}
       {{/with}}
