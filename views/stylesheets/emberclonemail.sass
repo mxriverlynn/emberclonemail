@@ -1,0 +1,175 @@
+@import blueprint/reset
+@import partials/base
+@import blueprint
+@import blueprint/scaffolding
+
+=box
+  +border-radius
+  border: 1px solid #ccc
+  padding: 2px
+  background-color: #eee
+
+=a($normal:#00a, $hover:#000)
+  a, a:hover, a:active, a:visited
+    color: $normal
+    text-decoration: underline
+
+  a:hover
+    color: $hover
+    text-decoration: underline
+
+body
+  +blueprint-typography(true)
+  +blueprint-utilities
+  +blueprint-debug
+  +blueprint-interaction
+  font: Helvetica, Arial, Sans-Serif
+  font-size: 9pt
+  +a
+  background-color: #555
+
+.container
+  +container
+
+section
+  width: auto
+  background-color: #eee
+
+section.header
+  padding: 10px 0px
+  h1
+    padding: 5px 0px 0px 0px
+    margin: 0px
+    font-size: 30pt
+    font-weight: bold
+  p
+    padding: 0px
+    margin: 0px
+  header
+    +column(9.6)
+  header.help
+    +box
+    margin-top: 5px
+    font-size: 8pt
+    color: #555
+    border: 1px solid #aaa
+
+section.content
+  padding: 25px 0px
+  background-color: #fff
+  navigation
+    section#app-selector 
+      margin-bottom: 10px
+      background-color: #fff
+      select
+        display: block
+        height: 25px
+        width: 148px
+        font-size: 12pt
+    section#navigation
+      +box
+      p
+        padding: 0px 
+        margin: 0px 5px
+        font-weight: bold
+      ul.customCategories
+        padding-top: 5px
+        border-top: 1px solid #ccc
+      ul
+        +no-bullets
+        margin: 5px 0px
+        padding: 0px
+        li
+          +box
+          margin: 2px
+          padding: 2px 5px
+          border: 1px solid #ddd
+          background-color: #f7f7f7
+  article
+    #loading
+      display: none
+      +column(15)
+      text-align: center
+    ul.email-list, ul.contact-list
+      +no-bullets
+      padding: 0px
+      margin: 0px
+      li
+        +box
+        cursor: pointer
+        margin: 0px 5px 10px 0px
+        padding: 2px 5px
+        border: 1px solid #ccc
+        background-color: #fff
+        article
+          .body
+            cursor: auto
+            +column(13.5)
+            +push(0.5)
+            +prepend-top(1em)
+            padding-bottom: 0px
+            margin-bottom: 0px
+            ul.emailCategories
+              +column(14.5)
+              margin: 0px
+              padding: 0px
+              li
+                padding: 2px 5px
+                margin: 0px 5px 15px 0px
+                width: auto
+                display: inline
+                background-color: #ffffaf
+                color: #777
+                font-size: 7pt
+                float: right
+
+    ul.email-list
+      li
+        +column(15)
+        .from
+          +column(3)
+        .subject
+          +column(10)
+          font-weight: bold
+        .date
+          +column(1.75)
+          text-align: right
+    ul.contact-list
+      li
+        +column(4.75)
+        .name
+          +column(4.8)
+          font-size: 12pt
+          text-align: center
+          font-weight: bold
+        .email, .phone
+          +column(4.8)
+
+section.footer
+  border-top: 2px solid #aaa
+  background-color: #555
+  padding-bottom: 10px
+
+navigation
+  +column(4)
+  section
+    padding: 2px
+
+article
+  +column(15.5)
+
+footer
+  $footer-color: #ddd
+  +column(20)
+  margin: 0px auto
+  font-size: 8pt
+  color: $footer-color
+  +a($footer-color, #fff)
+  ul
+    +column(3.9)
+    +no-bullets
+    margin: 10px 10px 0px 0px
+    padding: 0px
+    li.title
+      font-weight: bold
+
