@@ -9,8 +9,7 @@
 
 EmberCloneMail = Ember.Application.create();
 
-EmberCloneMail.Email = Ember.Object.extend({
-});
+EmberCloneMail.Email = Ember.Object.extend({});
 
 EmberCloneMail.EmailListView = Em.View.extend({
   classNames: ["email-list", "email-view"],
@@ -22,5 +21,22 @@ EmberCloneMail.EmailPreview = Em.View.extend({
 });
 
 EmberCloneMail.emailController = Ember.ArrayController.create({
-  content: [{from: "Bob Jone", subject: "Did you get that thing I sent you?", date: "10/10/201"}]
+  content: [],
+
+  loadEmail: function(){
+    var that = this;
+    $.ajax({
+      url: "/email",
+      dataType: "json",
+
+      success: function(emailList){
+        var email = emailList.map(function(emailData){
+          return EmberCloneMail.Email.create(emailData);
+        });
+        that.set("content", email);
+      }
+    });
+  }
 });
+
+EmberCloneMail.emailController.loadEmail();

@@ -6,17 +6,19 @@
 
     %script{ :type=>"text/x-handlebars", :"data-template-name" => "email-list-view"}
       {{#each EmberCloneMail.emailController}}
-      {{view EmberCloneMail.EmailPreview tagName="li"}}
+      {{view EmberCloneMail.EmailPreview tagName="li" contentBinding="this"}}
       {{/each}}
 
     %script{ :type => "text/x-handlebars", :"data-template-name" => "email-preview"}
+      {{#with content}}
       %header
         %span.from
-          {{from}}Joe Bob
+          {{from}}
         %span.subject
-          {{subject}}Did you get that thing I sent you?
+          {{subject}}
         %span.date
-          {{date}}10/10/2010
+          {{date}}
+      {{/with}}
 
   %body
     %section.header
