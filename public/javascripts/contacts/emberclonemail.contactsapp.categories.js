@@ -1,19 +1,18 @@
-// Backbone.BBCloneMail
+// Backbone.EmberCloneMail
 // A reference application for Backbone.Marionette
 //
 // Copyright (C)2012 Derick Bailey, Muted Solutions, LLC
 // Distributed Under MIT License
 //
 // Documentation and Full License Available at:
-// http://github.com/derickbailey/backbone.bbclonemail
-// http://github.com/derickbailey/backbone.marionette
+// http://github.com/derickbailey/emberclonemail
 
 // Contact Categories
 // --------
 
 // Manage the list of categories, and the interactions with them,
 // for the contacts app.
-BBCloneMail.ContactsApp.Categories = (function(BBCloneMail, Backbone){
+EmberCloneMail.ContactsApp.Categories = (function(EmberCloneMail, Backbone){
   var Categories = {};
 
   // Categories Views
@@ -21,7 +20,7 @@ BBCloneMail.ContactsApp.Categories = (function(BBCloneMail, Backbone){
 
   // Displays the hard coded list of contact categories, from
   // the view template.
-  Categories.ContactCategoriesView = BBCloneMail.ItemView.extend({
+  Categories.ContactCategoriesView = EmberCloneMail.ItemView.extend({
     template: "#contact-categories-view-template",
 
     events: {
@@ -39,8 +38,8 @@ BBCloneMail.ContactsApp.Categories = (function(BBCloneMail, Backbone){
   // Show the list of contact categories in the 
   // left hand navigation.
   Categories.show = function(){
-    BBCloneMail.navigationRegion.show(new Categories.ContactCategoriesView());
+    EmberCloneMail.navigationRegion.show(new Categories.ContactCategoriesView());
   }
 
   return Categories;
-})(BBCloneMail, Backbone);
+})(EmberCloneMail, Backbone);

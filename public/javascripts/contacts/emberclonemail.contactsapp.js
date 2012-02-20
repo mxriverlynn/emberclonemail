@@ -1,12 +1,11 @@
-// Backbone.BBCloneMail
+// Backbone.EmberCloneMail
 // A reference application for Backbone.Marionette
 //
 // Copyright (C)2012 Derick Bailey, Muted Solutions, LLC
 // Distributed Under MIT License
 //
 // Documentation and Full License Available at:
-// http://github.com/derickbailey/backbone.bbclonemail
-// http://github.com/derickbailey/backbone.marionette
+// http://github.com/derickbailey/emberclonemail
 
 // Contacts
 // --------
@@ -14,7 +13,7 @@
 // Manage the list of contacts and the categories for
 // the contacts. Limited functionality at this point,
 // but slowly adding more.
-BBCloneMail.ContactsApp = (function(BBCloneMail, Backbone){
+EmberCloneMail.ContactsApp = (function(EmberCloneMail, Backbone){
   var Contacts = {};
 
   // Contact Model And Collection
@@ -32,19 +31,19 @@ BBCloneMail.ContactsApp = (function(BBCloneMail, Backbone){
   
   // Show the contact list and the categories.
   Contacts.showContactList = function(){
-    BBCloneMail.ContactsApp.ContactList.show(Contacts.contacts);
-    BBCloneMail.ContactsApp.Categories.show();
-    BBCloneMail.vent.trigger("contacts:show");
+    EmberCloneMail.ContactsApp.ContactList.show(Contacts.contacts);
+    EmberCloneMail.ContactsApp.Categories.show();
+    EmberCloneMail.vent.trigger("contacts:show");
   };
 
   // Initializer
   // -----------
   
-  BBCloneMail.addInitializer(function(){
+  EmberCloneMail.addInitializer(function(){
     Contacts.contacts = new Contacts.ContactCollection();
     Contacts.contacts.fetch();
   });
   
   return Contacts;
-})(BBCloneMail, Backbone);
+})(EmberCloneMail, Backbone);
 

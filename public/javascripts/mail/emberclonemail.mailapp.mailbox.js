@@ -1,26 +1,25 @@
-// Backbone.BBCloneMail
+// Backbone.EmberCloneMail
 // A reference application for Backbone.Marionette
 //
 // Copyright (C)2012 Derick Bailey, Muted Solutions, LLC
 // Distributed Under MIT License
 //
 // Documentation and Full License Available at:
-// http://github.com/derickbailey/backbone.bbclonemail
-// http://github.com/derickbailey/backbone.marionette
+// http://github.com/derickbailey/emberclonemail
 
 // MailApp.Mailbox
 // ---------------
 
 // The Mailbox is a sub-app of the Mail App. It controls the 
 // display of the mail list and the individual emails.
-BBCloneMail.MailApp.MailBox = (function(BBCloneMail, Backbone, $){
+EmberCloneMail.MailApp.MailBox = (function(EmberCloneMail, Backbone, $){
   var MailBox = {};
 
   // Mail Box Views
   // --------------
   
   // The the full contents of the email.
-  var EmailView = BBCloneMail.ItemView.extend({
+  var EmailView = EmberCloneMail.ItemView.extend({
     tagName: "ul",
     className: "email-list email-view",
     template: "#email-view-template"
@@ -28,7 +27,7 @@ BBCloneMail.MailApp.MailBox = (function(BBCloneMail, Backbone, $){
 
   // Show a preview of the email in the list. Clicking
   // on it will show the full contents of the email.
-  var EmailPreview = BBCloneMail.ItemView.extend({
+  var EmailPreview = EmberCloneMail.ItemView.extend({
     tagName: "li",
     template: "#email-preview-template",
 
@@ -37,13 +36,13 @@ BBCloneMail.MailApp.MailBox = (function(BBCloneMail, Backbone, $){
     },
 
     showEmail: function(e){
-      BBCloneMail.vent.trigger("mail:message:show", this.model);
+      EmberCloneMail.vent.trigger("mail:message:show", this.model);
     }
   });
 
   // The actual mail box view, which renders each
   // of the individual email items. 
-  var EmailListView = BBCloneMail.CollectionView.extend({
+  var EmailListView = EmberCloneMail.CollectionView.extend({
     tagName: "ul",
     className: "email-list",
     itemView: EmailPreview
@@ -57,7 +56,7 @@ BBCloneMail.MailApp.MailBox = (function(BBCloneMail, Backbone, $){
     var emailView = new EmailView({
       model: message
     });
-    BBCloneMail.mainRegion.show(emailView);
+    EmberCloneMail.mainRegion.show(emailView);
   }
 
   // A method to display a list of supplied email messages.
@@ -65,7 +64,7 @@ BBCloneMail.MailApp.MailBox = (function(BBCloneMail, Backbone, $){
     var emailListView = new EmailListView({
       collection: emailList
     });
-    BBCloneMail.mainRegion.show(emailListView);
+    EmberCloneMail.mainRegion.show(emailListView);
   }
 
   // Mail Box Event Handlers
@@ -73,9 +72,9 @@ BBCloneMail.MailApp.MailBox = (function(BBCloneMail, Backbone, $){
 
   // Handle the selection of an email message by displaying
   // it in the main area of the application.
-  BBCloneMail.vent.bind("mail:message:show", function(message){
+  EmberCloneMail.vent.bind("mail:message:show", function(message){
     MailBox.showMessage(message);
   });
 
   return MailBox;
-})(BBCloneMail, Backbone, jQuery);
+})(EmberCloneMail, Backbone, jQuery);

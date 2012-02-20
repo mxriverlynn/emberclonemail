@@ -1,12 +1,11 @@
-// Backbone.BBCloneMail
+// Backbone.EmberCloneMail
 // A reference application for Backbone.Marionette
 //
 // Copyright (C)2012 Derick Bailey, Muted Solutions, LLC
 // Distributed Under MIT License
 //
 // Documentation and Full License Available at:
-// http://github.com/derickbailey/backbone.bbclonemail
-// http://github.com/derickbailey/backbone.marionette
+// http://github.com/derickbailey/emberclonemail
 
 // MailApp.Categories
 // ------------------
@@ -14,7 +13,7 @@
 // The list of categories for email. Right now this 
 // displayed a hard coded list, stuffed directly in
 // the HTML template. 
-BBCloneMail.MailApp.Categories = (function(BBCloneMail, Backbone, $){
+EmberCloneMail.MailApp.Categories = (function(EmberCloneMail, Backbone, $){
   var Categories = {};
 
   // The category model and collection
@@ -30,7 +29,7 @@ BBCloneMail.MailApp.Categories = (function(BBCloneMail, Backbone, $){
   // The view to show the list of categories. The view
   // template includes the standard categories hard coded
   // and then it renders the individual categories, too.
-  Categories.CategoriesView = BBCloneMail.ItemView.extend({
+  Categories.CategoriesView = EmberCloneMail.ItemView.extend({
     template: "#mail-categories-view-template",
 
     events: {
@@ -44,9 +43,9 @@ BBCloneMail.MailApp.Categories = (function(BBCloneMail, Backbone, $){
       e.preventDefault();
       var category = $(e.currentTarget).data("category");
       if (category){
-        BBCloneMail.vent.trigger("mail:category:show", category);
+        EmberCloneMail.vent.trigger("mail:category:show", category);
       } else {
-        BBCloneMail.vent.trigger("mail:show");
+        EmberCloneMail.vent.trigger("mail:show");
       }
     }
   });
@@ -59,7 +58,7 @@ BBCloneMail.MailApp.Categories = (function(BBCloneMail, Backbone, $){
     var categoryView = new Categories.CategoriesView({
       collection: Categories.categoryCollection
     })
-    BBCloneMail.navigationRegion.show(categoryView);
+    EmberCloneMail.navigationRegion.show(categoryView);
   }
 
   // Mail Categories Initializer
@@ -68,10 +67,10 @@ BBCloneMail.MailApp.Categories = (function(BBCloneMail, Backbone, $){
   // Get the list of categories on startup and hold
   // then in memory, so we can render them on to the
   // screen when we need to.
-  BBCloneMail.addInitializer(function(){
+  EmberCloneMail.addInitializer(function(){
     Categories.categoryCollection = new CategoryCollection();
     Categories.categoryCollection.fetch();
   });
 
   return Categories;
-})(BBCloneMail, Backbone, jQuery);
+})(EmberCloneMail, Backbone, jQuery);

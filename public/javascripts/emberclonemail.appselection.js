@@ -1,12 +1,11 @@
-// Backbone.BBCloneMail
+// Backbone.EmberCloneMail
 // A reference application for Backbone.Marionette
 //
 // Copyright (C)2012 Derick Bailey, Muted Solutions, LLC
 // Distributed Under MIT License
 //
 // Documentation and Full License Available at:
-// http://github.com/derickbailey/backbone.bbclonemail
-// http://github.com/derickbailey/backbone.marionette
+// http://github.com/derickbailey/emberclonemail
 
 // App Selector
 // ------------
@@ -15,12 +14,12 @@
 // application that lets you choose between "Mail" and "Contacts".
 // Changing the selected app will cause the application to switch to
 // that sub-app's contents and functionality.
-BBCloneMail.AppSelection = (function(BBCloneMail, Backbone){
+EmberCloneMail.AppSelection = (function(EmberCloneMail, Backbone){
   var AppSelection = {};
 
   // The app selection view handles the changing of the app
   // selector drop list.
-  AppSelection.AppSelectionView = BBCloneMail.ItemView.extend({
+  AppSelection.AppSelectionView = EmberCloneMail.ItemView.extend({
     events: {
       "change select": "appChanged"
     },
@@ -41,9 +40,9 @@ BBCloneMail.AppSelection = (function(BBCloneMail, Backbone){
       var appName = $(e.currentTarget).val();
 
       if (appName == "mail"){
-        BBCloneMail.MailApp.showInbox();
+        EmberCloneMail.MailApp.showInbox();
       } else {
-        BBCloneMail.ContactsApp.showContactList();
+        EmberCloneMail.ContactsApp.showContactList();
       }
     },
 
@@ -57,13 +56,13 @@ BBCloneMail.AppSelection = (function(BBCloneMail, Backbone){
 
       // When the mail app is shown, be sure we are displaying "Mail"
       // in the app selector.
-      BBCloneMail.vent.bind("mail:show", function(){
+      EmberCloneMail.vent.bind("mail:show", function(){
         self.setSelection("mail");
       });
 
       // When the contacts app is shown, be sure we are displaying 
       // "Contacts" in the app selector.
-      BBCloneMail.vent.bind("contacts:show", function(){
+      EmberCloneMail.vent.bind("contacts:show", function(){
         self.setSelection("contacts");
       });
     }
@@ -71,11 +70,11 @@ BBCloneMail.AppSelection = (function(BBCloneMail, Backbone){
 
   // Initialize the App Selector functionality when the
   // application starts.
-  BBCloneMail.addInitializer(function(){
+  EmberCloneMail.addInitializer(function(){
     AppSelection.view = new AppSelection.AppSelectionView({
       el: $("#app-selector")
     });
   });
 
   return AppSelection;
-})(BBCloneMail, Backbone);
+})(EmberCloneMail, Backbone);

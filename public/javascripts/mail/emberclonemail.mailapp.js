@@ -1,12 +1,11 @@
-// Backbone.BBCloneMail
+// Backbone.EmberCloneMail
 // A reference application for Backbone.Marionette
 //
 // Copyright (C)2012 Derick Bailey, Muted Solutions, LLC
 // Distributed Under MIT License
 //
 // Documentation and Full License Available at:
-// http://github.com/derickbailey/backbone.bbclonemail
-// http://github.com/derickbailey/backbone.marionette
+// http://github.com/derickbailey/emberclonemail
 
 // MailApp
 // -------
@@ -15,7 +14,7 @@
 // for email. It contains all of the 
 // high level knowledge of how to run the app
 // when it's in mail mode.
-BBCloneMail.MailApp = (function(BBCloneMail, Backbone){
+EmberCloneMail.MailApp = (function(EmberCloneMail, Backbone){
   var MailApp = {};
 
   // Email Model And Collection
@@ -23,7 +22,7 @@ BBCloneMail.MailApp = (function(BBCloneMail, Backbone){
 
   MailApp.Email = Backbone.Model.extend({});
 
-  MailApp.EmailCollection = BBCloneMail.Collection.extend({
+  MailApp.EmailCollection = EmberCloneMail.Collection.extend({
     url: "/email",
     model: MailApp.Email,
 
@@ -61,7 +60,7 @@ BBCloneMail.MailApp = (function(BBCloneMail, Backbone){
   // Show the inbox with all email.
   MailApp.showInbox = function(){
     MailApp.showCategory();
-    BBCloneMail.vent.trigger("mail:show");
+    EmberCloneMail.vent.trigger("mail:show");
   };
 
   // Show a list of email for the given category.
@@ -84,13 +83,13 @@ BBCloneMail.MailApp = (function(BBCloneMail, Backbone){
 
   // When a category is selected, filter the mail list
   // based on it.
-  BBCloneMail.vent.bind("mail:category:show", function(category){
+  EmberCloneMail.vent.bind("mail:category:show", function(category){
     showFilteredEmailList(category);
   });
 
   // When the mail app is shown or `inbox` is clicked,
   // show all the mail.
-  BBCloneMail.vent.bind("mail:show", function(){
+  EmberCloneMail.vent.bind("mail:show", function(){
     showFilteredEmailList();
   });
 
@@ -99,11 +98,11 @@ BBCloneMail.MailApp = (function(BBCloneMail, Backbone){
 
   // Initializes the email collection object with the list
   // of emails that are passed in from the call to 
-  // `BBCloneMail.start`.
-  BBCloneMail.addInitializer(function(){
+  // `EmberCloneMail.start`.
+  EmberCloneMail.addInitializer(function(){
     MailApp.emailList = new MailApp.EmailCollection();
     MailApp.emailList.fetch();
   });
   
   return MailApp;
-})(BBCloneMail, Backbone);
+})(EmberCloneMail, Backbone);
