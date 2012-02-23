@@ -1,17 +1,9 @@
 EmberCloneMail.Email = Ember.Object.extend({});
 
-EmberCloneMail.emailController = Ember.Object.create({
-  showEmail: function(view){
-    var email = view.get("content");
-    EmberCloneMail.emailView = EmberCloneMail.EmailView.create({
-      content: email
-    });
-    EmberCloneMail.emailView.replaceIn("#main");
-  }
-});
-
-EmberCloneMail.emailListController = Ember.ArrayController.create({
+EmberCloneMail.emailController = Ember.ArrayController.create({
   content: [],
+
+  selectedEmail: null,
 
   loadEmail: function(){
     var that = this;
@@ -26,6 +18,17 @@ EmberCloneMail.emailListController = Ember.ArrayController.create({
         that.set("content", email);
       }
     });
+  },
+
+  showInbox: function(){
+    EmberCloneMail.emailController.loadEmail();
+    EmberCloneMail.emailStates.goToState("showInbox");
+  },
+  
+  showEmail: function(view){
+    var email = view.get("content");
+    this.set("selectedEmail", email);
+    EmberCloneMail.emailStates.goToState("showEmail");
   }
 });
 
@@ -49,8 +52,17 @@ EmberCloneMail.EmailView = Em.View.extend({
   templateName: "email-view"
 });
 
-EmberCloneMail.emailListController.loadEmail();
-EmberCloneMail.emailListView = EmberCloneMail.EmailListView.create({});
-EmberCloneMail.emailListView.appendTo("#main");
+EmberCloneMail.emailStates = Ember.StateManager.create({
+  rootElement: "#main",
 
+  showInbox: Ember.ViewState.create({
+    view: EmberCloneMail.EmailListView.create()
+  }),
 
+  showEmail: Ember.ViewState.create({
+    view: EmberCloneMail.EmailView.create()
+  })
+
+});
+
+EmberCloneMail.emailController.showInbox();

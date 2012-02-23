@@ -5,7 +5,7 @@
     %link{:href=>"/css/emberclonemail.css", :rel=>"stylesheet", :type=>"text/css"}
 
     %script{ :"data-template-name" => "email-list-view", :type=>"text/x-handlebars"}
-      {{#each EmberCloneMail.emailListController}}
+      {{#each EmberCloneMail.emailController}}
       {{view EmberCloneMail.EmailPreview 
       tagName="li" 
       contentBinding="this" 
@@ -25,7 +25,7 @@
       {{/with}}
 
     %script{:"data-template-name" => "email-view", :type => "text/x-handlebars"}
-      {{#with content}}
+      {{#with EmberCloneMail.emailController.selectedEmail}}
       %li
         %header
           %span.from
