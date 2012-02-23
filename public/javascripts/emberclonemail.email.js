@@ -1,37 +1,5 @@
 EmberCloneMail.Email = Ember.Object.extend({});
 
-EmberCloneMail.emailController = Ember.ArrayController.create({
-  content: [],
-
-  selectedEmail: null,
-
-  loadEmail: function(){
-    var that = this;
-    $.ajax({
-      url: "/email",
-      dataType: "json",
-
-      success: function(emailList){
-        var email = emailList.map(function(emailData){
-          return EmberCloneMail.Email.create(emailData);
-        });
-        that.set("content", email);
-      }
-    });
-  },
-
-  showInbox: function(){
-    EmberCloneMail.emailController.loadEmail();
-    EmberCloneMail.emailStates.goToState("showInbox");
-  },
-  
-  showEmail: function(view){
-    var email = view.get("content");
-    this.set("selectedEmail", email);
-    EmberCloneMail.emailStates.goToState("showEmail");
-  }
-});
-
 EmberCloneMail.EmailListView = Em.View.extend({
   tagName: "ul",
   classNames: ["email-list", "email-view"],
@@ -63,6 +31,38 @@ EmberCloneMail.emailStates = Ember.StateManager.create({
     view: EmberCloneMail.EmailView.create()
   })
 
+});
+
+EmberCloneMail.emailController = Ember.ArrayController.create({
+  content: [],
+
+  selectedEmail: null,
+
+  loadEmail: function(){
+    var that = this;
+    $.ajax({
+      url: "/email",
+      dataType: "json",
+
+      success: function(emailList){
+        var email = emailList.map(function(emailData){
+          return EmberCloneMail.Email.create(emailData);
+        });
+        that.set("content", email);
+      }
+    });
+  },
+
+  showInbox: function(){
+    EmberCloneMail.emailController.loadEmail();
+    EmberCloneMail.emailStates.goToState("showInbox");
+  },
+  
+  showEmail: function(view){
+    var email = view.get("content");
+    this.set("selectedEmail", email);
+    EmberCloneMail.emailStates.goToState("showEmail");
+  }
 });
 
 EmberCloneMail.emailController.showInbox();
