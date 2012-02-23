@@ -7,7 +7,6 @@
     %script{ :"data-template-name" => "email-list-view", :type=>"text/x-handlebars"}
       {{#each EmberCloneMail.emailController}}
       {{view EmberCloneMail.EmailPreview 
-      tagName="li" 
       contentBinding="this" 
       target="EmberCloneMail.emailController" 
       action="showEmail"}}

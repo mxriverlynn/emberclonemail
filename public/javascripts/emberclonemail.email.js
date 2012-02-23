@@ -7,6 +7,7 @@ EmberCloneMail.EmailListView = Em.View.extend({
 });
 
 EmberCloneMail.EmailPreview = Em.View.extend(Ember.TargetActionSupport, {
+  tagName: "li",
   templateName: "email-preview",
 
   click: function(e){
